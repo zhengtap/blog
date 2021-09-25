@@ -7,7 +7,6 @@
     <groupId>org.tap</groupId>
     <artifactId>blog</artifactId>
     <version>1.0</version>
-
     <packaging>pom</packaging>
     <name>blog</name>
     <description>个人博客</description>
@@ -15,6 +14,7 @@
     <modules>
         <module>blog-admin</module>
     </modules>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>

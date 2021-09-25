@@ -29,7 +29,7 @@ module.exports = {
     productionSourceMap: false,
     // webpack-dev-server 相关配置
     devServer: {
-        host: '0.0.0.0',
+        host: 'localhost',
         port: port,
         proxy: {
             // detail: https://cli.vuejs.org/config/#devserver-proxy
@@ -37,7 +37,7 @@ module.exports = {
                 target: `http://localhost:8888`,
                 changeOrigin: true,
                 pathRewrite: {
-                    ['^' + process.env.VUE_APP_BASE_API]: ''
+                    ['^' + process.env.VUE_APP_BASE_API]: '/'
                 }
             }
         },
@@ -80,6 +80,9 @@ module.exports = {
             .tap(options => {
                 options.compilerOptions.preserveWhitespace = true;
                 return options
+            })
+            .options({
+                hotReload: false
             })
             .end();
 

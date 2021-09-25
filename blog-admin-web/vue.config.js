@@ -29,15 +29,19 @@ module.exports = {
   productionSourceMap: false,
   // webpack-dev-server 相关配置
   devServer: {
-    host: '0.0.0.0',
+    host: 'localhost',
     port: port,
     proxy: {
-      // detail: https://cli.vuejs.org/config/#devserver-proxy
+      // 代理器中设置/api,项目中请求路径为/api的替换为target
       [process.env.VUE_APP_BASE_API]: {
+        //代理地址，这里设置的地址会代替axios中设置的baseURL
         target: `http://localhost:8888`,
         changeOrigin: true,
+        //pathRewrite方法重写url
         pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: ''
+          //pathRewrite: {'^/api': '/'} 重写之后url为 http://localhost:8888/xxxx
+          //pathRewrite: {'^/api': '/api'} 重写之后url为 http://localhost:8888/api/xxxx
+          ['^' + process.env.VUE_APP_BASE_API]: '/'
         }
       }
     },
@@ -81,6 +85,9 @@ module.exports = {
       .tap(options => {
         options.compilerOptions.preserveWhitespace = true;
         return options
+      })
+      .options({
+        hotReload: false
       })
       .end();
 
